@@ -7,8 +7,8 @@ from app.prompts import MAP_PROMPT_TEMPLATE, COMBINE_PROMPT_TEMPLATE
 
 def build_llm():
     return ChatGoogleGenerativeAI(
-        model = settings.GEMINI_MODEL,
-        gemini_api_key = settings.GEMINI_API_KEY,
+        model = settings.GOOGLE_MODEL,
+        google_api_key = settings.GOOGLE_API_KEY,
         temperature = 0
     )
 
