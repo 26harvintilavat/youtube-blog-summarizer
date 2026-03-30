@@ -1,0 +1,8 @@
+langchain
+langchain-google-genai
+langchain-text-splitters
+python-dotenv
+requests
+beautifulsoup4
+youtube-transcript-api
+lxml
