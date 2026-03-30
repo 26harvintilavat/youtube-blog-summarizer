@@ -10,4 +10,6 @@ class Settings:
     CHUNK_SIZE: int = 2000
     CHUNK_OVERLAP: int = 200
 
+    TRANSCRIPT_LANGUAGES = ["en-IN", "en", "hi", "gu", "mr", "ta", "te", "kn", "ml", "bn", "pa"]
+
 settings = Settings()
