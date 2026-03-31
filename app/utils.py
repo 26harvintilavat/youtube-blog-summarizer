@@ -1,4 +1,7 @@
 from urllib.parse import urlparse, parse_qs
+import json
+import os
+import re
 
 def is_youtube_url(url: str) -> bool:
     parsed = urlparse(url)
@@ -22,6 +25,35 @@ def extract_youtube_video_id(url: str) -> str:
             return path_parts[1]
         
     raise ValueError("Could not extract YouTube video ID from URL.")
+
+def ensure_directory(path: str) -> str:
+    os.makedirs(path, exist_ok=True)
+
+def sanitize_filename(name: str) -> str:
+    cleaned = re.sub(r'[<>:"/\\|?*]', "", name)
+    cleaned = re.sub(r"\s+", "_", cleaned.strip())
+    return cleaned[:80] or "summary"
+
+def extract_json_from_text(text: str) -> dict:
+    """
+    Tries to parse JSON directly.
+    If the model adds extra text, tries to extract the first JSON object block.
+    """
+    text = text.strip()
+
+    try:
+        return json.loads(text)
+    except json.JSONDecodeError:
+        pass
+
+    start = text.find("{")
+    end = text.rfind("}")
+
+    if start != -1 and end != -1 and end > start:
+        possible_json = text[start:end + 1]
+        return json.loads(possible_json)
+    
+    raise ValueError("Could not parse valid JSON from model response")
 
 # if __name__=='__main__':
 #     test_urls = [
