@@ -1,6 +1,6 @@
 import requests
 from bs4 import BeautifulSoup
-from app.exceptions import ContentLoadError
+from app.core.exceptions import ContentLoadError
 
 def load_blog_text(url: str) -> str:
     headers = {

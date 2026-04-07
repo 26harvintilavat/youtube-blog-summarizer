@@ -1,7 +1,7 @@
 from youtube_transcript_api import YouTubeTranscriptApi
-from app.utils import extract_youtube_video_id
-from app.config import settings
-from app.exceptions import ContentLoadError
+from app.utils.helpers import extract_youtube_video_id
+from app.core.config import settings
+from app.core.exceptions import ContentLoadError
 
 def load_youtube_transcript(url: str) -> str:
     try:

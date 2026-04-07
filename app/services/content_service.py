@@ -1,4 +1,4 @@
-from app.utils import is_youtube_url
+from app.utils.helpers import is_youtube_url
 from app.loaders.youtube_loader import load_youtube_transcript
 from app.loaders.blog_loader import load_blog_text
 
