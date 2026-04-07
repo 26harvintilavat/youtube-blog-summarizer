@@ -7,3 +7,5 @@ beautifulsoup4
 youtube-transcript-api
 lxml
 pydantic
+fastapi 
+uvicorn 
