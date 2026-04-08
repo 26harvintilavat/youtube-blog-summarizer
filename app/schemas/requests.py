@@ -1,4 +1,18 @@
-from pydantic import BaseModel, HttpUrl
+from typing import Literal
+from pydantic import BaseModel, HttpUrl, Field
 
-class SummarizeRequest(BaseModel):
+SummaryStyle = Literal["brief", "detailed", "bullet", "executive"]
+
+def SummarizeRequest(BaseModel):
     url: HttpUrl
+    summary_style: SummaryStyle = Field(
+        default="detailed",
+        description="Style of final summary output."
+    )
+
+    output_language: str = Field(
+        default="English",
+        min_length=2,
+        max_length=40,
+        description="Language for final summary output."
+    )
