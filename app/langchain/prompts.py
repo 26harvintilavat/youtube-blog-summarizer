@@ -32,13 +32,21 @@ Generate a final answer in valid JSON with this exact structure:
 }}
 
 Rules:
+- The output language must be: {output_language}
+- The summary style must be: {summary_style}
 - title should be short and descriptive
-- short_summary should be a concise paragraph
-- detailed_summary should contain 6 to 10 bullet-style points as array items
-- key_takeaways should contain 4 to 6 concise points as array items
+- short_summary should match the requested style
+- detailed_summary should contain 6 to 10 items unless style=brief, then 4 to 6 items
+- key_takeaways should contain 4 to 6 concise points
 - output must be valid JSON only
 - do not wrap JSON in markdown
 - do not add extra commentary
+
+Style guidance:
+- brief: compact and direct
+- detailed: balanced coverage
+- bullet: point-first and highly scannable
+- executive: crisp, high-level, decision-oriented
 
 PARTIAL SUMMARIES:
 {context}

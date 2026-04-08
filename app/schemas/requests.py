@@ -3,7 +3,7 @@ from pydantic import BaseModel, HttpUrl, Field
 
 SummaryStyle = Literal["brief", "detailed", "bullet", "executive"]
 
-def SummarizeRequest(BaseModel):
+class SummarizeRequest(BaseModel):
     url: HttpUrl
     summary_style: SummaryStyle = Field(
         default="detailed",
