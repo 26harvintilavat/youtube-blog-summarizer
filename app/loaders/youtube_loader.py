@@ -1,11 +1,17 @@
+import logging
 from youtube_transcript_api import YouTubeTranscriptApi
+
 from app.utils.helpers import extract_youtube_video_id
 from app.core.config import settings
 from app.core.exceptions import ContentLoadError
 
+logger = logging.getLogger(__name__)
+
 def load_youtube_transcript(url: str) -> str:
     try:
         video_id = extract_youtube_video_id(url)
+        logger.info("Loading YouTube transcript for video_id=%s", video_id)
+
         transcript_items = YouTubeTranscriptApi().fetch(
             video_id,
             languages=settings.TRANSCRIPT_LANGUAGES
@@ -18,6 +24,7 @@ def load_youtube_transcript(url: str) -> str:
         return transcript_text
     
     except Exception as exc:
+        logger.exception("Failed to load YouTube transcript.")
         raise ContentLoadError(f"Failed to load YouTube transcript: {exc}") from exc
     
 # if __name__=="__main__":

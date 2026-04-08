@@ -1,6 +1,10 @@
+import logging
 import requests
 from bs4 import BeautifulSoup
 from app.core.exceptions import ContentLoadError
+from app.core.config import settings
+
+logger = logging.getLogger(__name__)
 
 def load_blog_text(url: str) -> str:
     headers = {
@@ -11,7 +15,9 @@ def load_blog_text(url: str) -> str:
         )
     }
     try:
-        response = requests.get(url, headers=headers, timeout=20)
+        logger.info("Loading blog content from url=%s", url)
+
+        response = requests.get(url, headers=headers, timeout=settings.REQUEST_TIMEOUT)
         response.raise_for_status()
 
         soup = BeautifulSoup(response.text, "lxml")
@@ -27,6 +33,7 @@ def load_blog_text(url: str) -> str:
         return text
     
     except Exception as exc:
+        logger.exception("Failed to load blog content")
         raise ContentLoadError(f"Failed to load blog content: {exc}") from exc
 
 # if __name__=="__main__":
