@@ -13,3 +13,7 @@ class ContentLoadError(AppError):
 class SummarizationError(AppError):
     """Raised when summarization fails."""
     pass
+
+class ConfigurationError(AppError):
+    """Raised when application configuration is invalid."""
+    pass
